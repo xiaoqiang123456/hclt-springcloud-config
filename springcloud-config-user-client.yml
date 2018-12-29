@@ -1,28 +1,118 @@
 ﻿spring:
   profiles:
-    active:
+    activce:
     - dev
 ---
 server:
-  port: 8201
+  port: 8003
 spring:
-  profiles: dev
-  application:
-    name: hclt-springcloud-config-client
-eureka:
-  client:
-    service-url:
-      defaultZone: http://eureka-dev.com:8761/eureka/ #注意此处的 eureka-dev是个配置文件
+  profile: dev
+  appliaction:
+    name: springcloud-config-user-client
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://10.124.65.118/test
+    username: root
+    password: 123456
+    type: com.alibaba.druid.pool.DruidDataSource            # 当前数据源操作类型
+    # 初始化大小，最小，最大
+    dbcp2:
+      min-idle: 5                                           # 数据库连接池的最小维持连接数
+      initial-size: 5                                       # 初始化连接数
+      max-total: 5                                          # 最大连接数
+      max-wait-millis: 200                                  # 等待连接获取的最大超时时间
+#      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+#      timeBetweenEvictionRunsMillis: 60000
+#      # 配置一个连接在池中最小生存的时间，单位是毫秒
+#      minEvictableIdleTimeMillis: 300000
+#      validationQuery: SELECT 1 FROM DUAL
+#      testWhileIdle: true
+#      testOnBorrow: false
+#      testOnReturn: false
+#      poolPreparedStatements: true
+#      # 配置监控统计拦截的filters,去掉监控界面sql无法统计，‘wall’用于防火墙
+#      #            filters: stat,wall,log4j
+#      filters: stat,wall
+#      maxPoolPreparedStatementPerConnectionSize: 20
+#      userGlobalDataSourceStat: true
+#      # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+#      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
 
+mybatis:
+  configuration:
+    #    config-location: classpath:mybatis/mybatis.cfg.xml        # mybatis配置文件所在路径
+    #    type-aliases-package: com.hclt.mybatis.bean    # 所有Entity别名类所在包
+    #    mapper-locations:
+    #    - classpath:mybatis/mapper/**/*.xml                       # mapper映射文件
+    map-underscore-to-camel-case: true
+
+eureka:
+  instance:
+    instance-id: provider-demo-8003
+    prefer-ip-address: true
+  client:
+    register-with-eureka: false #不把自己(服务端)注册到euraka上
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+info:
+  app.name: provider-ticket-01
+  company.name: www.leshi.com
+  build.artifactId: provider-ticket
+  build.version: 0.0.1-SNAPSHOT
 ---
 server:
-  port: 8202
+  port: 8003
 spring:
-  profiles: test
-  application:
-    name: hclt-springcloud-config-client
+  profile: test
+  appliaction:
+    name: springcloud-config-user-client
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://10.124.65.118/test
+    username: root
+    password: 123456
+    type: com.alibaba.druid.pool.DruidDataSource            # 当前数据源操作类型
+    # 初始化大小，最小，最大
+    dbcp2:
+      min-idle: 5                                           # 数据库连接池的最小维持连接数
+      initial-size: 5                                       # 初始化连接数
+      max-total: 5                                          # 最大连接数
+      max-wait-millis: 200                                  # 等待连接获取的最大超时时间
+#      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+#      timeBetweenEvictionRunsMillis: 60000
+#      # 配置一个连接在池中最小生存的时间，单位是毫秒
+#      minEvictableIdleTimeMillis: 300000
+#      validationQuery: SELECT 1 FROM DUAL
+#      testWhileIdle: true
+#      testOnBorrow: false
+#      testOnReturn: false
+#      poolPreparedStatements: true
+#      # 配置监控统计拦截的filters,去掉监控界面sql无法统计，‘wall’用于防火墙
+#      #            filters: stat,wall,log4j
+#      filters: stat,wall
+#      maxPoolPreparedStatementPerConnectionSize: 20
+#      userGlobalDataSourceStat: true
+#      # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+#      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+
+mybatis:
+  configuration:
+    #    config-location: classpath:mybatis/mybatis.cfg.xml        # mybatis配置文件所在路径
+    #    type-aliases-package: com.hclt.mybatis.bean    # 所有Entity别名类所在包
+    #    mapper-locations:
+    #    - classpath:mybatis/mapper/**/*.xml                       # mapper映射文件
+    map-underscore-to-camel-case: true
+
 eureka:
+  instance:
+    instance-id: provider-demo-8003
+    prefer-ip-address: true
   client:
+    register-with-eureka: false #不把自己(服务端)注册到euraka上
     service-url:
-      defaultZone: http://eureka-test.com:8761/eureka/  #注意此处的 eureka-test 是个配置文件
-#请保存为utf-8格式
+      defaultZone: http://localhost:8761/eureka/
+info:
+  app.name: provider-ticket-01
+  company.name: www.leshi.com
+  build.artifactId: provider-ticket
+  build.version: 0.0.1-SNAPSHOT
