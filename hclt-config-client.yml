@@ -1,0 +1,28 @@
+﻿spring:
+  profiles:
+    active:
+    - dev
+---
+server:
+  port: 8201
+spring:
+  profiles: dev
+  application:
+    name: hclt-springcloud-config-client
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-dev.com:8761/eureka/ #注意此处的 eureka-dev是个配置文件
+
+---
+server:
+  port: 8202
+spring:
+  profiles: test
+  application:
+    name: hclt-springcloud-config-client
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-test.com:8761/eureka/  #注意此处的 eureka-test 是个配置文件
+#请保存为utf-8格式
