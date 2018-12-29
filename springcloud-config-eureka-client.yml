@@ -1,0 +1,36 @@
+﻿spring:
+  profiles:
+    activce:
+    - dev
+---
+server:
+  port: 8761
+spring:
+  profile: dev
+  appliaction:
+    name: springcloud-config-eureka-client
+
+eureka:
+  instance:
+    hostname: eureka8761.com #实例的主机名 冒号后面必须有空格
+  client:
+    register-with-eureka: false #不把自己(服务端)注册到euraka上
+    fetch-registry: false #不从euraka上来获取服务的注册信息
+    service-url:
+      defaultZone: http://eureka8761.com:8761/eureka/ #设置与Eureka Server交互的地址查询服务和注册服务都需要依赖这个地址（单机）
+---
+server:
+  port: 8761
+spring:
+  profile: test
+  appliaction:
+    name: springcloud-config-eureka-client
+
+eureka:
+  instance:
+    hostname: eureka8761.com #实例的主机名 冒号后面必须有空格
+  client:
+    register-with-eureka: false #不把自己(服务端)注册到euraka上
+    fetch-registry: false #不从euraka上来获取服务的注册信息
+    service-url:
+      defaultZone: http://eureka8761.com:8761/eureka/ #设置与Eureka Server交互的地址查询服务和注册服务都需要依赖这个地址（单机）
